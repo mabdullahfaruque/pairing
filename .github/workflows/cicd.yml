@@ -56,32 +56,32 @@ jobs:
       # you can deploy the build output to GitHub Pages.
       # Uncomment the following steps to enable GitHub Pages deployment
 
-      # - name: upload pages artifact
-      #   uses:  actions/upload-pages-artifact@v3
-      #   with:
-      #     path: ${{ github.workspace }}/dist/
-      # - name: deploy pages artifact
-      #   id: deploy-pages-artifact
-      #   uses: actions/deploy-pages@v4
-      # - name: show deployed url
-      #   run: |
-      #     # show deployed URL for github pages
-      #     echo "📚 Deployed pages to ${{ steps.deploy-pages-artifact.outputs.page_url }}" | tee -a $GITHUB_STEP_SUMMARY
+      - name: upload pages artifact
+        uses:  actions/upload-pages-artifact@v3
+        with:
+          path: ${{ github.workspace }}/dist/
+      - name: deploy pages artifact
+        id: deploy-pages-artifact
+        uses: actions/deploy-pages@v4
+      - name: show deployed url
+        run: |
+          # show deployed URL for github pages
+          echo "📚 Deployed pages to ${{ steps.deploy-pages-artifact.outputs.page_url }}" | tee -a $GITHUB_STEP_SUMMARY
 
       # run e2e tests using playwright to test the deployment to github pages
 
-      # - name: Run e2e tests PVT
-      #   run: |
-      #     echo "📣 PVT: Running e2e tests against deployed pages at ${{ steps.deploy-pages-artifact.outputs.page_url }}" | tee -a $GITHUB_STEP_SUMMARY
-      #     if [ "${{ env.PAUSE_BEFORE_E2E }}" = "true" ]; then
-      #       echo "⏳ Waiting for ${{ env.PAUSE_BEFORE_E2E_SECONDS }} seconds before running e2e tests" | tee -a $GITHUB_STEP_SUMMARY
-      #       sleep ${{ env.PAUSE_BEFORE_E2E_SECONDS }}
-      #     fi
-      #     echo "🧪 Running PVT e2e tests" | tee -a $GITHUB_STEP_SUMMARY
-      #     npm run test:e2e
-      #     echo "✅ PVT e2e tests completed" | tee -a $GITHUB_STEP_SUMMARY
-      #   env:
-      #     BASE_URL: ${{ steps.deploy-pages-artifact.outputs.page_url }} # set the base URL for the PVT e2e tests
+      - name: Run e2e tests PVT
+        run: |
+          echo "📣 PVT: Running e2e tests against deployed pages at ${{ steps.deploy-pages-artifact.outputs.page_url }}" | tee -a $GITHUB_STEP_SUMMARY
+          if [ "${{ env.PAUSE_BEFORE_E2E }}" = "true" ]; then
+            echo "⏳ Waiting for ${{ env.PAUSE_BEFORE_E2E_SECONDS }} seconds before running e2e tests" | tee -a $GITHUB_STEP_SUMMARY
+            sleep ${{ env.PAUSE_BEFORE_E2E_SECONDS }}
+          fi
+          echo "🧪 Running PVT e2e tests" | tee -a $GITHUB_STEP_SUMMARY
+          npm run test:e2e
+          echo "✅ PVT e2e tests completed" | tee -a $GITHUB_STEP_SUMMARY
+        env:
+          BASE_URL: ${{ steps.deploy-pages-artifact.outputs.page_url }} # set the base URL for the PVT e2e tests
 
     # - name: Upload screenshots as artifact
     #   if: github.event_name == 'pull_request' || github.event_name == 'push'
