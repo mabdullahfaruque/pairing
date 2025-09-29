@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "axe/aria": [
+      "default",
+      {
+        // deal with bug in aria-valid-attr-value where if the value is invalid, we cannot use React to calculate and return the bool string
+        "aria-valid-attr-value": "off"
+      }
+    ]
+  }
+}

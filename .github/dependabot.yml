@@ -1,0 +1,21 @@
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "GSE-2100 "
+      prefix-development: "GSE-2100 dev"
+      include: "scope"
+    # Only allow major and minor updates, ignore patch
+    allow:
+      - dependency-name: "*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+      # vite 7 does not work with typescript or tailwindcss so we ignore higher versions for now
+      - dependency-name: "vite"
+        versions: [">=7.0.0"]
