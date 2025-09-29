@@ -10,7 +10,11 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) => {
 
 const App = () => (
   <HashRouter>
-    <header className="w-full flex justify-start py-5 bg-[var(--color-primary)] shadow-lg mb-0 animate-fade-in dark:shadow-blue-900/40">
+    <header className="w-full flex flex-col justify-start py-5 bg-[var(--color-primary)] shadow-lg mb-0 animate-fade-in dark:shadow-blue-900/40">
+      <div className="w-full max-w-5xl mx-auto px-4 mb-3 flex items-center gap-3">
+        <span className="text-4xl" role="img" aria-label="Bangladesh flag">🇧🇩</span>
+        <h1 className="text-[var(--color-primary-contrast)] text-xl font-bold">Bangladesh Cricket Team</h1>
+      </div>
       <nav className="flex gap-4 w-full max-w-5xl mx-auto px-4" aria-label="Primary Navigation">
         <NavLink to="/" end className={navLinkClass} aria-label="Home">Hello</NavLink>
         <NavLink to="/about" className={navLinkClass} aria-label="About">About</NavLink>
